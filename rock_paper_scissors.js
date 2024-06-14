@@ -25,21 +25,45 @@ function getHumanChoice(choices) {
   }
 }
 
-function playRound (playerChoice, cpuChoice) {
-    if (playerChoice == cpuChoice) {
-      return prompt("It's a tie!!");
-    } else if ((playerChoice == choices[0] && cpuChoice == choices[2]) || (playerChoice == choices[1] && cpuChoice == choices[0]) 
-    || (playerChoice == choices[2] && cpuChoice == choices[1])) {
-        return prompt ("You win!!");
-    } else {
-        return prompt ("CPU won! You lose!");
-    }
+function playRound(playerChoice, cpuChoice) {
+  if (playerChoice == cpuChoice) {
+    prompt("It's a tie!!");
+    return "Tie";
+  } else if (
+    (playerChoice == choices[0] && cpuChoice == choices[2]) ||
+    (playerChoice == choices[1] && cpuChoice == choices[0]) ||
+    (playerChoice == choices[2] && cpuChoice == choices[1])
+  ) {
+    playerScore++;
+    console.log("Player score: " + playerScore + "  CPU score: " + cpuScore);
+    prompt("You win!! Player score: " + playerScore + "  CPU score: " + cpuScore);
+  } else {
+    cpuScore++;
+    console.log("Player score: " + playerScore + "  CPU score: " + cpuScore);
+    prompt("CPU won! You lose! Player score: " + playerScore + "  CPU score: " + cpuScore);
+  }
 }
 
-const playerChoice = getHumanChoice(choices);
-const cpuChoice = getCPUChoice(choices);
-playRound (playerChoice, cpuChoice);
+function playGame() {
+  let round = 1;
+  while (round <= 5) {
+    prompt("Round " + round);
+    const playerChoice = getHumanChoice(choices);
+    const cpuChoice = getCPUChoice(choices);
+    const result = playRound(playerChoice, cpuChoice);
 
-// function playGame () {
-    
-// }
+    if (result !== "Tie") {
+      round++;
+    }
+  }
+
+  if (playerScore > cpuScore) {
+    prompt( "You won the game! Player score: " + playerScore + "  CPU score: " + cpuScore);
+    console.log("You won the game!!");
+  } else {
+    prompt("CPU won! Better luck next time! Player score: " + playerScore + "  CPU score: " + cpuScore);
+    console.log("CPU won!");
+  }
+}
+
+playGame();
