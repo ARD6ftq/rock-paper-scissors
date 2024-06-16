@@ -27,7 +27,7 @@ function getHumanChoice(choices) {
 
 function playRound(playerChoice, cpuChoice) {
   if (playerChoice == cpuChoice) {
-    prompt("It's a tie!!");
+    alert("It's a tie!!");
     return "Tie";
   } else if (
     (playerChoice == choices[0] && cpuChoice == choices[2]) ||
@@ -36,18 +36,18 @@ function playRound(playerChoice, cpuChoice) {
   ) {
     playerScore++;
     console.log("Player score: " + playerScore + "  CPU score: " + cpuScore);
-    prompt("You win!! Player score: " + playerScore + "  CPU score: " + cpuScore);
+    alert("You win!! Player score: " + playerScore + "  CPU score: " + cpuScore);
   } else {
     cpuScore++;
     console.log("Player score: " + playerScore + "  CPU score: " + cpuScore);
-    prompt("CPU won! You lose! Player score: " + playerScore + "  CPU score: " + cpuScore);
+    alert("CPU won! You lose! Player score: " + playerScore + "  CPU score: " + cpuScore);
   }
 }
 
 function playGame() {
   let round = 1;
   while (round <= 5) {
-    prompt("Round " + round);
+    alert("Round " + round);
     const playerChoice = getHumanChoice(choices);
     const cpuChoice = getCPUChoice(choices);
     const result = playRound(playerChoice, cpuChoice);
@@ -58,10 +58,10 @@ function playGame() {
   }
 
   if (playerScore > cpuScore) {
-    prompt( "You won the game! Player score: " + playerScore + "  CPU score: " + cpuScore);
+    alert( "You won the game! Player score: " + playerScore + "  CPU score: " + cpuScore);
     console.log("You won the game!!");
   } else {
-    prompt("CPU won! Better luck next time! Player score: " + playerScore + "  CPU score: " + cpuScore);
+    alert("CPU won! Better luck next time! Player score: " + playerScore + "  CPU score: " + cpuScore);
     console.log("CPU won!");
   }
 }
