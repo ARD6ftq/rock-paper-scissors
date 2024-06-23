@@ -46,17 +46,17 @@ function playRound(playerChoice, cpuChoice) {
 
 function playGame() {
   let round = 1;
-  while (round <= 5) {
-    alert("Round " + round);
-    const playerChoice = getHumanChoice(choices);
-    const cpuChoice = getCPUChoice(choices);
-    const result = playRound(playerChoice, cpuChoice);
+  // while (round <= 5) {
+  //   alert("Round " + round);
+  //   const playerChoice = getHumanChoice(choices);
+  //   const cpuChoice = getCPUChoice(choices);
+  //   const result = playRound(playerChoice, cpuChoice);
 
-    if (result !== "Tie") {
-      round++;
-    }
-  }
-
+  //   if (result !== "Tie") {
+  //     round++;
+  //   }
+  // }
+  
   if (playerScore > cpuScore) {
     alert( "You won the game! Player score: " + playerScore + "  CPU score: " + cpuScore);
     console.log("You won the game!!");
@@ -65,5 +65,15 @@ function playGame() {
     console.log("CPU won!");
   }
 }
+const container = document.querySelector(".container");
+const rock = document.createElement("button");
+rock.textContent = "Rock";
+container.appendChild(rock);
+const paper = document.createElement("button");
+paper.textContent = "Paper";
+container.appendChild(paper);
+const scissors = document.createElement("button");
+scissors.textContent = "Scissors";
+container.appendChild(scissors);
 
 playGame();
