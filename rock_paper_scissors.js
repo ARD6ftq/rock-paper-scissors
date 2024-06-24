@@ -34,9 +34,9 @@ function playRound(playerChoice, cpuChoice) {
     resultMessage = `CPU won! You lose! Player score: ${playerScore}  CPU score: ${cpuScore}`;
   }
 
-  resultDiv.textContent = resultMessage; // Update the content of the result div
-  playerScoreSpan.textContent = playerScore; // Update player score
-  cpuScoreSpan.textContent = cpuScore; // Update CPU score
+  resultDiv.textContent = resultMessage;
+  playerScoreSpan.textContent = playerScore;
+  cpuScoreSpan.textContent = cpuScore;
   return resultMessage;
 }
 
@@ -72,6 +72,18 @@ function playGame(playerChoice) {
     }
   }
 }
+
+function resetGame() {
+  playerScore = 0;
+  cpuScore = 0;
+  currentRound = 0;
+
+  document.getElementById("playerScore").textContent = playerScore;
+  document.getElementById("cpuScore").textContent = cpuScore;
+  document.getElementById("round").textContent = `Round: ${currentRound}`;
+  document.getElementById("result").textContent = "";
+}
+
 const container = document.querySelector(".container");
 
 const rock = document.createElement("button");
@@ -89,3 +101,6 @@ container.appendChild(scissors);
 rock.addEventListener("click", () => playGame("ROCK"));
 paper.addEventListener("click", () => playGame("PAPER"));
 scissors.addEventListener("click", () => playGame("SCISSORS"));
+
+const resetBtn = document.getElementById("resetBtn");
+resetBtn.addEventListener("click", resetGame);
