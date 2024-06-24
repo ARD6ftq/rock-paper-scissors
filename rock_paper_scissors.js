@@ -12,18 +12,18 @@ function getCPUChoice(choices) {
   return choices[choice];
 }
 
-function getHumanChoice(choices) {
-  while (true) {
-    let playerChoice = prompt("Please enter a choice: Rock, Paper, Scissors ");
-    playerChoice = playerChoice.toUpperCase();
+// function getHumanChoice(choices) {
+//   while (true) {
+//     let playerChoice = prompt("Please enter a choice: Rock, Paper, Scissors ");
+//     playerChoice = playerChoice.toUpperCase();
 
-    if (choices.includes(playerChoice)) {
-      return playerChoice;
-    } else {
-      alert("Invalid choice, pick again.");
-    }
-  }
-}
+//     if (choices.includes(playerChoice)) {
+//       return playerChoice;
+//     } else {
+//       alert("Invalid choice, pick again.");
+//     }
+//   }
+// }
 
 function playRound(playerChoice, cpuChoice) {
   if (playerChoice == cpuChoice) {
@@ -36,11 +36,18 @@ function playRound(playerChoice, cpuChoice) {
   ) {
     playerScore++;
     console.log("Player score: " + playerScore + "  CPU score: " + cpuScore);
-    alert("You win!! Player score: " + playerScore + "  CPU score: " + cpuScore);
+    alert(
+      "You win!! Player score: " + playerScore + "  CPU score: " + cpuScore
+    );
   } else {
     cpuScore++;
     console.log("Player score: " + playerScore + "  CPU score: " + cpuScore);
-    alert("CPU won! You lose! Player score: " + playerScore + "  CPU score: " + cpuScore);
+    alert(
+      "CPU won! You lose! Player score: " +
+        playerScore +
+        "  CPU score: " +
+        cpuScore
+    );
   }
 }
 
@@ -56,24 +63,55 @@ function playGame() {
   //     round++;
   //   }
   // }
-  
+
   if (playerScore > cpuScore) {
-    alert( "You won the game! Player score: " + playerScore + "  CPU score: " + cpuScore);
+    alert(
+      "You won the game! Player score: " +
+        playerScore +
+        "  CPU score: " +
+        cpuScore
+    );
     console.log("You won the game!!");
   } else {
-    alert("CPU won! Better luck next time! Player score: " + playerScore + "  CPU score: " + cpuScore);
+    alert(
+      "CPU won! Better luck next time! Player score: " +
+        playerScore +
+        "  CPU score: " +
+        cpuScore
+    );
     console.log("CPU won!");
   }
 }
+
+let cpuChoice = getCPUChoice(choices);
 const container = document.querySelector(".container");
+
 const rock = document.createElement("button");
-rock.textContent = "Rock";
+rock.textContent = "ROCK";
 container.appendChild(rock);
+
 const paper = document.createElement("button");
-paper.textContent = "Paper";
+paper.textContent = "PAPER";
 container.appendChild(paper);
+
 const scissors = document.createElement("button");
-scissors.textContent = "Scissors";
+scissors.textContent = "SCISSORS";
 container.appendChild(scissors);
 
-playGame();
+// Add event listeners to the buttons
+rock.addEventListener("click", () => {
+  const cpuChoice = getCPUChoice(choices);
+  playRound("ROCK", cpuChoice);
+});
+
+paper.addEventListener("click", () => {
+  const cpuChoice = getCPUChoice(choices);
+  playRound("PAPER", cpuChoice);
+});
+
+scissors.addEventListener("click", () => {
+  const cpuChoice = getCPUChoice(choices);
+  playRound("SCISSORS", cpuChoice);
+});
+
+// playGame();
