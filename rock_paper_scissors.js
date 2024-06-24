@@ -1,8 +1,8 @@
 const choices = ["ROCK", "PAPER", "SCISSORS"];
 let playerScore = 0;
 let cpuScore = 0;
+let currentRound = 1;
 
-//Generates a random up to max
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
@@ -12,22 +12,15 @@ function getCPUChoice(choices) {
   return choices[choice];
 }
 
-// function getHumanChoice(choices) {
-//   while (true) {
-//     let playerChoice = prompt("Please enter a choice: Rock, Paper, Scissors ");
-//     playerChoice = playerChoice.toUpperCase();
-
-//     if (choices.includes(playerChoice)) {
-//       return playerChoice;
-//     } else {
-//       alert("Invalid choice, pick again.");
-//     }
-//   }
-// }
-
 function playRound(playerChoice, cpuChoice) {
+  const resultDiv = document.getElementById("result");
+  const playerScoreSpan = document.getElementById("playerScore");
+  const cpuScoreSpan = document.getElementById("cpuScore");
+  const roundDiv = document.getElementById("round");
+  let resultMessage;
+
   if (playerChoice == cpuChoice) {
-    alert("It's a tie!!");
+    resultMessage = "It's a tie!!";
     return "Tie";
   } else if (
     (playerChoice == choices[0] && cpuChoice == choices[2]) ||
@@ -35,55 +28,50 @@ function playRound(playerChoice, cpuChoice) {
     (playerChoice == choices[2] && cpuChoice == choices[1])
   ) {
     playerScore++;
-    console.log("Player score: " + playerScore + "  CPU score: " + cpuScore);
-    alert(
-      "You win!! Player score: " + playerScore + "  CPU score: " + cpuScore
-    );
+    resultMessage = `You win!! Player score: ${playerScore}  CPU score: ${cpuScore}`;
   } else {
     cpuScore++;
-    console.log("Player score: " + playerScore + "  CPU score: " + cpuScore);
-    alert(
-      "CPU won! You lose! Player score: " +
-        playerScore +
-        "  CPU score: " +
-        cpuScore
-    );
+    resultMessage = `CPU won! You lose! Player score: ${playerScore}  CPU score: ${cpuScore}`;
   }
+
+  resultDiv.textContent = resultMessage; // Update the content of the result div
+  playerScoreSpan.textContent = playerScore; // Update player score
+  cpuScoreSpan.textContent = cpuScore; // Update CPU score
+  return resultMessage;
 }
 
-function playGame() {
-  let round = 1;
-  // while (round <= 5) {
-  //   alert("Round " + round);
-  //   const playerChoice = getHumanChoice(choices);
-  //   const cpuChoice = getCPUChoice(choices);
-  //   const result = playRound(playerChoice, cpuChoice);
+function playGame(playerChoice) {
+  if (currentRound > 5) {
+    return; // Do nothing if the game is already over
+  }
 
-  //   if (result !== "Tie") {
-  //     round++;
-  //   }
-  // }
+  const cpuChoice = getCPUChoice(choices);
+  const result = playRound(playerChoice, cpuChoice);
 
-  if (playerScore > cpuScore) {
-    alert(
-      "You won the game! Player score: " +
-        playerScore +
-        "  CPU score: " +
-        cpuScore
-    );
-    console.log("You won the game!!");
-  } else {
-    alert(
-      "CPU won! Better luck next time! Player score: " +
-        playerScore +
-        "  CPU score: " +
-        cpuScore
-    );
-    console.log("CPU won!");
+  if (result !== "Tie") {
+    currentRound++;
+    if (currentRound <= 5) {
+      document.getElementById("round").textContent = `Round: ${currentRound}`;
+    }
+  }
+
+  if (currentRound > 5) {
+    if (playerScore > cpuScore) {
+      alert(
+        `You won the game! Player score: ${playerScore}  CPU score: ${cpuScore}`
+      );
+      console.log("You won the game!!");
+    } else if (playerScore < cpuScore) {
+      alert(
+        `CPU won! Better luck next time! Player score: ${playerScore}  CPU score: ${cpuScore}`
+      );
+      console.log("CPU won!");
+    } else {
+      alert(`It's a tie! Player score: ${playerScore}  CPU score: ${cpuScore}`);
+      console.log("It's a tie!");
+    }
   }
 }
-
-let cpuChoice = getCPUChoice(choices);
 const container = document.querySelector(".container");
 
 const rock = document.createElement("button");
@@ -98,20 +86,6 @@ const scissors = document.createElement("button");
 scissors.textContent = "SCISSORS";
 container.appendChild(scissors);
 
-// Add event listeners to the buttons
-rock.addEventListener("click", () => {
-  const cpuChoice = getCPUChoice(choices);
-  playRound("ROCK", cpuChoice);
-});
-
-paper.addEventListener("click", () => {
-  const cpuChoice = getCPUChoice(choices);
-  playRound("PAPER", cpuChoice);
-});
-
-scissors.addEventListener("click", () => {
-  const cpuChoice = getCPUChoice(choices);
-  playRound("SCISSORS", cpuChoice);
-});
-
-// playGame();
+rock.addEventListener("click", () => playGame("ROCK"));
+paper.addEventListener("click", () => playGame("PAPER"));
+scissors.addEventListener("click", () => playGame("SCISSORS"));
