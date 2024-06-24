@@ -102,5 +102,5 @@ rock.addEventListener("click", () => playGame("ROCK"));
 paper.addEventListener("click", () => playGame("PAPER"));
 scissors.addEventListener("click", () => playGame("SCISSORS"));
 
-const resetBtn = document.getElementById("resetBtn");
+const resetBtn = document.querySelector(".resetBtn");
 resetBtn.addEventListener("click", resetGame);
