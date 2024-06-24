@@ -1,0 +1,30 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+.gameContainer {
+    height: 100vh;
+    width: auto;
+    background-color: bisque;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#scores {
+    display: flex;
+    justify-content: space-around;
+}
+
+button {
+    border-radius: 10px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
